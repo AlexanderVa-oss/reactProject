@@ -24,3 +24,8 @@
     text-decoration: underline;
 }
 
+@media (max-width: 1000px) {
+    img {
+        display: none;
+    }
+}

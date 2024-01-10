@@ -9,7 +9,7 @@ const HomePage = () => {
         <Grid textAlign={"center"}>
             <MainSection />
             <FirstSection />
-            <CardsSection />
+            <CardsSection ></CardsSection>
         </Grid>
     );
 };
