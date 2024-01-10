@@ -14,6 +14,8 @@ import ModeIcon from "@mui/icons-material/Mode";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../routes/ROUTES";
 
 const CardComponent = ({
   title,
@@ -24,20 +26,21 @@ const CardComponent = ({
   cardNumber,
   id,
   onDelete,
-  onEdit,
 }) => {
+  const navigate = useNavigate();
 
   const handleDeleteClick = () => {
     console.log("Clicked on delete", id);
     onDelete(id);
   };
   const handleEditClick = () => {
-    onEdit(id);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
 
   return (
     <Card sx={{
       maxWidth: 275,
+      width: 800,
       transition: 'transform 0.5s ease-in-out',
       '&:hover': {
         transform: 'scale(1.05)',

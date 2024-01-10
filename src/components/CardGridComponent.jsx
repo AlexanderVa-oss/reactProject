@@ -42,9 +42,9 @@ let initialDataFromServer = [
 const CardGridComponent = () => {
 
     return (
-        <Grid container spacing={5} >
+        <Grid container spacing={2} >
             {initialDataFromServer.map((item, index) => (
-                <Grid item lg={3} md={6} xs={6} key={"carsCard" + index} >
+                <Grid item lg={3} md={6} xs={6} display={'grid'} justifyItems={'center'} key={"carsCard" + index}>
                     <CardComponent
                         id={item.id}
                         title={item.title}
