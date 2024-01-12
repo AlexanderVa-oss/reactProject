@@ -1,0 +1,49 @@
+/* RegisterPage.css */
+.registerBGImage{
+    height: 85vh;
+background-image: url("https://cdn.leonardo.ai/users/174b9e54-f96e-4369-950f-7eaad8384fa9/generations/e84f5ac2-5fd4-455b-be8b-32de76d52b69/Leonardo_Diffusion_XL_background_wallpaper_for_my_pc_0.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.register-container {
+    width: 100vw;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    
+}
+
+.register-container h1 {
+    text-align: center;
+    color: white;
+}
+
+.register-container form div {
+    margin-bottom: 10px;
+}
+
+.register-container form div label {
+    display: block;
+    margin-bottom: 5px;
+    color: white;
+}
+
+.register-container form div input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.register-container form button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: blue;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
