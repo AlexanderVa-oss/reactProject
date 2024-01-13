@@ -8,7 +8,13 @@ const MainSection = () => {
                 component="img"
                 image="/assets/images/israelFlag.png"
                 alt="Israel Flag"
-                />
+                sx={{
+                    margin: 'auto',
+                    width: '50%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '10px',
+                }}/>
         </Fragment>
     );
 };

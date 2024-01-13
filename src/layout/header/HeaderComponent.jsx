@@ -18,6 +18,17 @@ const Header = () => {
     };
     return (
         <Box className="header">
+
+            <Box className="header">
+                <div className="logo">
+                    Alexander Kukushkin
+                </div>
+                <img src="https://www.codewars.com/users/AlexanderVa-oss/badges/large" alt="Code War LVL" />
+                <nav className="navigation">
+                    <Links />
+                </nav>
+            </Box>
+
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
@@ -35,22 +46,12 @@ const Header = () => {
             >
                 <List>
                     {alwaysLinks.map((link) => (
-                        <ListItem button key={link.to} onClick={toggleDrawer} component={NavLink} to={link.to}>
+                        <ListItem key={link.to} onClick={toggleDrawer} component={NavLink} to={link.to}>
                             <ListItemText primary={link.children} />
                         </ListItem>
                     ))}
                 </List>
             </Drawer>
-
-            <Box className="header">
-                <div className="logo">
-                    Alexander Kukushkin
-                </div>
-                <img src="https://www.codewars.com/users/AlexanderVa-oss/badges/large" alt="Code War LVL" />
-                <nav className="navigation">
-                    <Links />
-                </nav>
-            </Box>
         </Box>
     );
 };

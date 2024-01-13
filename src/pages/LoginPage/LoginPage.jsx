@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-// import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
@@ -15,31 +14,25 @@ import CopyrightComponent from "./ui/CopyrightComponent";
 import { red } from '@mui/material/colors';
 import ButtonComponent from "../../components/ButtonComponent";
 
-
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
 
 const LoginPage = () => {
   const LoginImage = '/assets/images/alchemyrefiner_alchemymagic_1_22d89031-3379-47a7-aadc-10ac51303a4b_0.jpg';
 
-
-  /* top lvl for hooks */
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const navigate = useNavigate();
 
-  /* logic lvl for js */
+
   const handleEmailChange = (e) => {
-    // console.log(e.target.value);
     setEmailValue(e.target.value);
   };
   const handlePasswordChange = (e) => {
-    // console.log(e.target.value);
     setPasswordValue(e.target.value);
   };
   const handleSubmit = async (e) => {
-    e.preventDefault(); //stop refresh
-    //status ok from server
+    e.preventDefault();
     try {
       let { data } = await axios.post("/users/login", {
         email: emailValue,
@@ -49,7 +42,7 @@ const LoginPage = () => {
       localStorage.setItem("token", data);
       navigate(ROUTES.HOME);
     } catch (err) {
-      console.log("err from axios", err);
+      console.log("err from axios", err.message);
     }
   };
   return (
@@ -132,12 +125,12 @@ const LoginPage = () => {
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
+                  Forgot password?<br /> "Thats your problem!" <br /> I can't help you!!!
                 </Link>
               </Grid>
               <Grid item>
                 <Link to={ROUTES.REGISTER}>
-                  {"Sign Up"}
+                  {"Register now"}
                 </Link>
               </Grid>
             </Grid>
