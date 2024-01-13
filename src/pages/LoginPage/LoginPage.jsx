@@ -114,12 +114,7 @@ const LoginPage = () => {
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
             />
-            <ButtonComponent
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <ButtonComponent>
               Sign In
             </ButtonComponent>
             <Grid container>
