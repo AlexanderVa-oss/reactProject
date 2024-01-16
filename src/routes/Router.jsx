@@ -5,6 +5,7 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import EditCardPage from "../pages/EditCardPage/EditCardPage";
 import CreateNewCard from "../pages/CreateNewCard/CreateNewCard";
+import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage ";
 
@@ -18,6 +19,7 @@ const Router = () => {
             <Route path={ROUTES.CREATECARD} element={<CreateNewCard />} />
             <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
             <Route path="*" element={<NotFoundPage />} />
+            <Route path={ROUTES.ABOUTUS} element={<AboutUsPage />} />
         </Routes>
     );
 };

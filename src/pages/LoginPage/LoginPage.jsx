@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import CopyrightComponent from "./ui/CopyrightComponent";
 import { red } from '@mui/material/colors';
 import ButtonComponent from "../../components/ButtonComponent";
+import LoginContext from '../../store/loginContext'
+import { jwtDecode } from "jwt-decode";
 
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
@@ -23,14 +25,17 @@ const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
   const navigate = useNavigate();
+  const { setLogin } = useContext(LoginContext);
 
 
   const handleEmailChange = (e) => {
     setEmailValue(e.target.value);
   };
+
   const handlePasswordChange = (e) => {
     setPasswordValue(e.target.value);
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -38,13 +43,20 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      console.log("data from axios", data);
       localStorage.setItem("token", data);
+      const userInfoFromToken = jwtDecode(data);
+      
+      console.log(userInfoFromToken);
+
+      setLogin(userInfoFromToken);
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from axios", err.message);
+      setLogin(null);
+      localStorage.clear();
     }
   };
+
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
       <CssBaseline />
@@ -123,11 +135,21 @@ const LoginPage = () => {
                   Forgot password?<br /> "Thats your problem!" <br /> I can't help you!!!
                 </Link>
               </Grid>
+
               <Grid item>
                 <Link to={ROUTES.REGISTER}>
                   {"Register now"}
                 </Link>
               </Grid>
+            </Grid>
+
+            <Grid item xs m={5}>
+              <Typography href="#" variant="body2">
+                {"Don't have an account?"}<br />
+                {'This Is Admin Accaount:'}<br />
+                email: admin@gmail.com<br/>
+                password: Abc!123Abc
+              </Typography>
             </Grid>
             <CopyrightComponent sx={{ mt: 5 }} />
           </Box>

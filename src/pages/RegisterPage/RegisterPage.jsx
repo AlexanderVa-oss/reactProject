@@ -14,9 +14,9 @@ import ROUTES from "../../routes/ROUTES";
 import { useNavigate } from "react-router-dom";
 import normalizeRegister from "./normalizeRegister";
 import {
-    validateEmailLogin,
-    validatePasswordLogin,
-    validateFirstSchema,
+    // validateEmailLogin,
+    // validatePasswordLogin,
+    // validateFirstSchema,
     validateSchema,
 } from "../../validation/registerValidation";
 import ButtonComponent from "../../components/ButtonComponent";

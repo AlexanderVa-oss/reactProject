@@ -4,5 +4,6 @@ const ROUTES = {
   REGISTER: "/register",
   EDITCARD: "/editcard",
   CREATECARD: "/createcard",
+  ABOUTUS: '/aboutus',
 };
 export default ROUTES;
