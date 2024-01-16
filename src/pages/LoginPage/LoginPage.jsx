@@ -1,3 +1,4 @@
+// LoginPage.jsx
 import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
@@ -43,17 +44,15 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      localStorage.setItem("token", data);
+      console.log('Dont Forget add Function for "remember me"');
+      sessionStorage.setItem("token", data);
       const userInfoFromToken = jwtDecode(data);
-      
-      console.log(userInfoFromToken);
-
       setLogin(userInfoFromToken);
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from axios", err.message);
       setLogin(null);
-      localStorage.clear();
+      sessionStorage.clear();
     }
   };
 
