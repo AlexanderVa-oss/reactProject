@@ -11,7 +11,6 @@ import LoginContext from "../../store/loginContext";
 const Links = () => {
     const { login } = useContext(LoginContext);
     const loggedIn = login;
-    console.log(loggedIn);
     return (
         <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {alwaysLinks.map((link) => (

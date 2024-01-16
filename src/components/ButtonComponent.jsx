@@ -2,7 +2,6 @@ import { memo } from "react";
 import Button from "@mui/material/Button";
 
 const ButtonComponent = ({ color, children, onClick }) => {
-  console.log("Button rerender");
   return (
     <Button
       type="submit"

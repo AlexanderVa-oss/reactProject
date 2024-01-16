@@ -5,7 +5,6 @@ import { useState } from "react";
 
 function App() {
   const [login, setLogin ] = useState(null);
-  console.log(login);
   return (
     <LoginContext.Provider value={{login, setLogin}}>
       <LayoutComponent>
