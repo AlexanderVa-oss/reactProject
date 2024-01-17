@@ -16,6 +16,12 @@ import { red } from '@mui/material/colors';
 import ButtonComponent from "../../components/ButtonComponent";
 import LoginContext from '../../store/loginContext'
 import { jwtDecode } from "jwt-decode";
+import { toast } from "react-toastify";
+import {
+  validateEmailLogin,
+  validatePasswordLogin,
+} from "../../validation/loginValidation";
+import { Alert } from "@mui/material";
 
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
@@ -25,6 +31,8 @@ const LoginPage = () => {
 
   const [emailValue, setEmailValue] = useState("");
   const [passwordValue, setPasswordValue] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
   const navigate = useNavigate();
   const { setLogin } = useContext(LoginContext);
 
@@ -37,6 +45,13 @@ const LoginPage = () => {
     setPasswordValue(e.target.value);
   };
 
+  const [rememberMe, setRememberMe] = useState(false);
+
+  const handleRememberMeChange = (event) => {
+    setRememberMe(event.target.checked);
+  };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -44,15 +59,48 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      console.log('Dont Forget add Function for "remember me"');
-      sessionStorage.setItem("token", data);
       const userInfoFromToken = jwtDecode(data);
       setLogin(userInfoFromToken);
+
+      if (rememberMe) {
+        localStorage.setItem("token", data);
+        toast.success("👌 Remember!", { /* options toast */ });
+      } else {
+        sessionStorage.setItem("token", data);
+        toast.success(" 🤷‍♀️ Not Remember!", { /* options toast */ });
+      }
+
+      if (userInfoFromToken.isAdmin) {
+        toast.success("🔑 Welcome Admin!", { /* options toast */ });
+      } else if (userInfoFromToken.isBusiness) {
+        toast.info("🧑‍💼 Welcome Business User!", { /* options toast */ });
+      } else {
+        toast.success("🔓 Logged In Successfully", { /* options toast */ });
+      }
+
       navigate(ROUTES.HOME);
     } catch (err) {
-      console.log("err from axios", err.message);
+      toast.error('🔒 Wrong Email or Password', {/* options toast */ });
       setLogin(null);
       sessionStorage.clear();
+      localStorage.clear();
+    }
+  };
+
+  const handleEmailBlur = () => {
+    let dataFromJoi = validateEmailLogin({ email: emailValue });
+    if (dataFromJoi.error) {
+      setEmailError(dataFromJoi.error.details[0].message);
+    } else {
+      setEmailError("");
+    }
+  };
+  const handlePasswordBlur = () => {
+    let dataFromJoi = validatePasswordLogin({ password: passwordValue });
+    if (dataFromJoi.error) {
+      setPasswordError(dataFromJoi.error.details[0].message);
+    } else {
+      setPasswordError("");
     }
   };
 
@@ -108,7 +156,10 @@ const LoginPage = () => {
               autoFocus
               value={emailValue}
               onChange={handleEmailChange}
+              onBlur={handleEmailBlur}
             />
+            {emailError && <Alert severity="error">{emailError}</Alert>}
+
             <TextField
               margin="normal"
               required
@@ -120,9 +171,18 @@ const LoginPage = () => {
               autoComplete="current-password"
               value={passwordValue}
               onChange={handlePasswordChange}
+              onBlur={handlePasswordBlur}
             />
+            {passwordError && <Alert severity="error">{passwordError}</Alert>}
+
             <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
+              control={
+                <Checkbox
+                  value="remember"
+                  checked={rememberMe}
+                  onChange={handleRememberMeChange}
+                  color="primary"
+                />}
               label="Remember me"
             />
             <ButtonComponent>
@@ -146,7 +206,10 @@ const LoginPage = () => {
               <Typography href="#" variant="body2">
                 {"Don't have an account?"}<br />
                 {'This Is Admin Accaount:'}<br />
-                email: admin@gmail.com<br/>
+                email: admin@gmail.com<br />
+                password: Abc!123Abc<br /><br />
+                {'This Is Business Accaount:'}<br />
+                email: ellvis@email.com<br />
                 password: Abc!123Abc
               </Typography>
             </Grid>

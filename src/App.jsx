@@ -1,13 +1,35 @@
-// App.jsx
+// App.jsx 
+import React, { useState, useEffect } from "react";
 import LayoutComponent from "./layout/LayoutComponent";
 import Router from "./routes/Router";
-import  LoginContext from "./store/loginContext";
-import { useState } from "react";
+import LoginContext from "./store/loginContext";
+import { jwtDecode } from "jwt-decode"; 
+import { ToastContainer } from "react-toastify";
 
 function App() {
-  const [login, setLogin ] = useState(null);
+  const [login, setLogin] = useState(null);
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    if (!token) {
+      token = sessionStorage.getItem("token");
+    }
+
+    if (token) {
+      try {
+        const userInfoFromToken = jwtDecode(token);
+        setLogin(userInfoFromToken);
+      } catch (error) {
+        console.error("Error when decoding Token: ", error);
+        sessionStorage.removeItem("token");
+        localStorage.removeItem("token");
+      }
+    }
+  }, []);
+
   return (
-    <LoginContext.Provider value={{login, setLogin}}>
+    <LoginContext.Provider value={{ login, setLogin }}>
+      <ToastContainer />
       <LayoutComponent>
         <Router />
       </LayoutComponent>

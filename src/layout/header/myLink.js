@@ -7,11 +7,18 @@ const alwaysLinks = [
 
 const loggedInLinks = [
     // { to: "/profile", children: "Profile page" },
-    { to: ROUTES.CREATECARD, children: "Create Card" },
+    { to: ROUTES.REGISTER, children: "Register page" },
 ];
 
 const loggedOutLinks = [
-    { to: ROUTES.REGISTER, children: "Register page" },
     { to: ROUTES.LOGIN, children: "Login page" },
 ];
-export { alwaysLinks, loggedInLinks, loggedOutLinks };
+
+const bizLinks = [
+    { to: ROUTES.CREATECARD, children: "Create Card" }
+];
+
+const adminLinks = [
+    { to: ROUTES.LOGIN, children: "Login page" },
+];
+export { alwaysLinks, loggedInLinks, loggedOutLinks, bizLinks, adminLinks };

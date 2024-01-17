@@ -3,6 +3,8 @@ import {
     alwaysLinks,
     loggedInLinks,
     loggedOutLinks,
+    bizLinks,
+    adminLinks
 } from "./myLink";
 import { useContext } from "react";
 import NavLinkComponent from "./NavLinkComponent";
@@ -20,13 +22,27 @@ const Links = () => {
             ))}
             {loggedIn &&
                 loggedInLinks.map((myItem, index) => (
-                    <NavLinkComponent to={myItem.to} key={"linksnav2" + index}>
+                    <NavLinkComponent to={myItem.to} key={"linksnav1" + index}>
                         {myItem.children}
                     </NavLinkComponent>
                 ))}
             {!loggedIn &&
                 loggedOutLinks.map((myItem, index) => (
+                    <NavLinkComponent to={myItem.to} key={"linksnav2" + index}>
+                        {myItem.children}
+                    </NavLinkComponent>
+                ))}
+            {loggedIn &&
+                loggedIn.isBusiness &&
+                bizLinks.map((myItem, index) => (
                     <NavLinkComponent to={myItem.to} key={"linksnav3" + index}>
+                        {myItem.children}
+                    </NavLinkComponent>
+                ))}
+            {loggedIn &&
+                loggedIn.isAdmin &&
+                adminLinks.map((myItem, index) => (
+                    <NavLinkComponent to={myItem.to} key={"linksnav4" + index}>
                         {myItem.children}
                     </NavLinkComponent>
                 ))}
