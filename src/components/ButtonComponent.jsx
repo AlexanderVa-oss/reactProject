@@ -1,13 +1,14 @@
 import { memo } from "react";
 import Button from "@mui/material/Button";
 
-const ButtonComponent = ({ color, children, onClick }) => {
+const ButtonComponent = ({ color, children, onClick, disabled }) => {
   return (
     <Button
       type="submit"
       variant="outlined"
       color={color}
       onClick={onClick}
+      disabled={disabled} 
       sx={{
         marginTop: "10px",
         width: "100%",

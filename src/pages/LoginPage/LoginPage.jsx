@@ -185,7 +185,9 @@ const LoginPage = () => {
                 />}
               label="Remember me"
             />
-            <ButtonComponent>
+            <ButtonComponent
+              disabled={!emailValue || !passwordValue || emailError.length > 0 || passwordError.length > 0}
+              color="primary">
               Sign In
             </ButtonComponent>
             <Grid container>
