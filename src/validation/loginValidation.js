@@ -7,6 +7,8 @@ const emailLoginSchema = Joi.object({
     .min(5)
     .required(),
 });
+
+// Before you change passwordLoginSchema check the password regex in registerValidation.js
 const passwordLoginSchema = Joi.object({
   password: Joi.string()
     .pattern(

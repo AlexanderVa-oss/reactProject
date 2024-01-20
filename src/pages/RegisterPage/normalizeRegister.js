@@ -1,3 +1,4 @@
+// normalizeRegister.js
 const normalizeRegister = (data) => {
   return {
     name: {
