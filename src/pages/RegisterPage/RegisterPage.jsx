@@ -16,6 +16,7 @@ import normalizeRegister from "./normalizeRegister";
 import validate from "../../validation/registerValidation";
 import ButtonComponent from "../../components/ButtonComponent";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
     const [inputsValue, setInputsValue] = useState({
@@ -33,6 +34,7 @@ const RegisterPage = () => {
         street: "",
         houseNumber: "",
         zip: "",
+        isBusiness: false,
     });
     const [errors, setErrors] = useState({
         first: "",
@@ -48,6 +50,10 @@ const RegisterPage = () => {
     });
 
     const navigate = useNavigate();
+
+    const handleIsBusinessChange = (event) => {
+        setInputsValue({ ...inputsValue, isBusiness: event.target.checked });
+    };
 
     const handleInputsChange = (e) => {
         const { id, value } = e.target;
@@ -91,7 +97,8 @@ const RegisterPage = () => {
         e.preventDefault();
 
         const validationErrors = Object.keys(inputsValue).reduce((acc, field) => {
-            const validationResult = validate[field] ? validate[field]({ [field]: inputsValue[field] }) : null;
+            const value = typeof inputsValue[field] === 'number' ? String(inputsValue[field]) : inputsValue[field];
+            const validationResult = validate[field] ? validate[field](value) : null;
             if (validationResult && validationResult.error) {
                 acc[field] = validationResult.error.details[0].message;
             }
@@ -103,13 +110,25 @@ const RegisterPage = () => {
             return;
         }
 
+        const userData = normalizeRegister(inputsValue);
+
         try {
-            await axios.post("/users", normalizeRegister(inputsValue));
-            navigate(ROUTES.LOGIN);
+            const response = await axios.post("/users", userData);
+            if (response.status === 200 || response.status === 201) {
+                navigate(ROUTES.LOGIN);
+            } else {
+                toast.error('🔒 Something Went Wrong');
+            }
         } catch (err) {
-            console.log("error from axios", err);
+            toast.error('🔒 Something Went Wrong');
+            console.error('There was an error submitting the form: ', err);
         }
     };
+
+    const allRequiredFieldsFilled = ['first', 'last', 'email', 'password', 'phone', 'country', 'city', 'street', 'houseNumber', 'zip']
+        .every(field => inputsValue[field].trim() !== '');
+
+    const noValidationErrors = Object.values(errors).every(error => error === '');
 
     return (
         <Box
@@ -332,12 +351,20 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <FormControlLabel
-                            control={<Checkbox value="allowExtraEmails" color="primary" />}
+                            control={
+                                <Checkbox
+                                    checked={inputsValue.isBusiness}
+                                    onChange={handleIsBusinessChange}
+                                    color="primary"
+                                />
+                            }
                             label="Business Account"
                         />
                     </Grid>
                 </Grid>
-                <ButtonComponent>
+                <ButtonComponent
+                    disabled={!allRequiredFieldsFilled || !noValidationErrors}
+                    color="primary">
                     Sign Up
                 </ButtonComponent>
             </Box>

@@ -1,5 +1,5 @@
 // normalizeRegister.js
-const normalizeRegister = (data) => {
+const normalizeRegister = (data, isBusiness) => {
   return {
     name: {
       first: data.first,
@@ -21,7 +21,7 @@ const normalizeRegister = (data) => {
       houseNumber: data.houseNumber,
       zip: data.zip,
     },
-    isBusiness: true,
+    isBusiness: data.isBusiness,
   };
 };
 

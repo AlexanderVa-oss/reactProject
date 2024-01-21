@@ -212,7 +212,13 @@ const LoginPage = () => {
                 password: Abc!123Abc<br /><br />
                 {'This Is Business Accaount:'}<br />
                 email: ellvis@email.com<br />
-                password: Abc!123Abc
+                password: Abc!123Abc<br /><br />
+                {'This Is My Not Business Accaount:'}<br />
+                email: Alex@gmail.com<br />
+                password: Abc!123Abc<br /><br />
+                {'This Is My Business Accaount:'}<br />
+                email: Ale@gmail.com<br />
+                password: Abc!123Abc<br /><br />
               </Typography>
             </Grid>
             <CopyrightComponent sx={{ mt: 5 }} />
