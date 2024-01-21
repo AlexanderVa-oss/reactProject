@@ -1,16 +1,8 @@
 /* Header.css */
 .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     background-color: #333;
     color: white;
     padding: 10px 20px;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
 }
 
 .navigation a {
@@ -21,7 +13,7 @@
 }
 
 .navigation a:hover {
-    text-decoration: underline;
+    color: rgb(80, 150, 190);
 }
 
 @media (max-width: 1000px) {

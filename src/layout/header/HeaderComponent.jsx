@@ -1,43 +1,95 @@
 // Header.js
-import React from 'react';
-import './ui/headerStyle.css';
-import Links from './Links';
-import { Box, Drawer, IconButton, List, ListItem, ListItemText } from "@mui/material";
+import React, { useContext } from 'react';
+import { Drawer, IconButton, List, ListItem, ListItemText, Grid, Typography } from "@mui/material";
 import MenuIcon from '@mui/icons-material/Menu';
-import { useState } from 'react';
-import { alwaysLinks } from './myLink'; 
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import LockIcon from '@mui/icons-material/Lock';
+import LoginContext from '../../store/loginContext';
+import Links from './Links';
 import { NavLink } from "react-router-dom";
-
-
+import { useState } from 'react';
+import { alwaysLinks } from './myLink';
+import "./ui/headerStyle.css"
+import { Button } from '@mui/material';
 
 const Header = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
+    const { login, setLogin } = useContext(LoginContext);
+
+    const getButtonLabel = () => {
+        if (!login) return "Not Logged In";
+        if (login.isAdmin) return "Admin Panel";
+        if (login.isBusiness) return "Business Dashboard";
+        return "User Profile";
+    };
+
+    const handleLogout = () => {
+        setLogin(null);
+        localStorage.removeItem("token");
+        sessionStorage.removeItem("token");
+    };
 
     const toggleDrawer = () => {
         setDrawerOpen(!isDrawerOpen);
     };
     return (
-        <Box className="header">
+        <Grid className="header" container>
 
-            <Box className="header">
-                <div className="logo">
+            <Grid container sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
+                <Button variant="h6" sx={{ display: 'inline' }}>
+                    {getButtonLabel()}
+                </Button>
+                <IconButton
+                    color="inherit"
+                    aria-label="login status"
+                >
+                    {login ? <AccountCircleIcon /> : <LockIcon />}
+                </IconButton>
+                <Button variant="h6" sx={{ display: 'inline' }} onClick={handleLogout}>
+                    {login ? "Log out" : "Not Logged"}
+                </Button>
+            </Grid>
+
+            <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography variant="h3"
+                    sx={{
+                        fontSize: {
+                            xs: '2rem',
+                            sm: '2.5rem', 
+                            md: '3rem', 
+                            lg: '3.5rem', 
+                            xl: '4rem'
+                        }
+                    }}
+                >
                     Alexander Kukushkin
-                </div>
+                </Typography>
+            </Grid>
+
+            <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <img src="https://www.codewars.com/users/AlexanderVa-oss/badges/large" alt="Code War LVL" />
-                <nav className="navigation">
+            </Grid>
+
+            <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Typography component="span" className="navigation">
                     <Links />
-                </nav>
-            </Box>
+                </Typography>
+            </Grid>
 
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={toggleDrawer}
-                sx={{ display: { md: 'none' } }}
+                sx={{
+                    display: { md: 'none' },
+                    left: 10,
+                    top: 10,
+                }}
             >
-                <MenuIcon />
+                <MenuIcon fontSize="large" />
             </IconButton>
+
 
             <Drawer
                 anchor="left"
@@ -52,7 +104,7 @@ const Header = () => {
                     ))}
                 </List>
             </Drawer>
-        </Box>
+        </Grid>
     );
 };
 
