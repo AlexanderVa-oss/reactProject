@@ -39,12 +39,12 @@ const Header = () => {
                 <Button variant="h6" sx={{ display: 'inline' }}>
                     {getButtonLabel()}
                 </Button>
-                <IconButton
+                <Button
                     color="inherit"
                     aria-label="login status"
                 >
                     {login ? <AccountCircleIcon /> : <LockIcon />}
-                </IconButton>
+                </Button>
                 <Button variant="h6" sx={{ display: 'inline' }} onClick={handleLogout}>
                     {login ? "Log out" : "Not Logged"}
                 </Button>
