@@ -1,37 +1,27 @@
+//CardGridComponent.jsx
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import CardComponent from "./CardComponent";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
-
+import { CardsContext } from "../store/searchContext";
 
 const CardGridComponent = () => {
-        const [dataFromServer, setDataFromServer] = useState([]);
-        const navigate = useNavigate();
-        useEffect(() => {
-            axios
-                .get("/cards")
-                .then(({ data }) => {
-                    setDataFromServer(data);
-                })
-                .catch((err) => {
-                    console.log("error from axios", err);
-                });
-        }, []);
-        if (!dataFromServer || !dataFromServer.length) {
-            return <Typography>Could not find any items</Typography>;
-        }
-        const handleDeleteCard = (id) => {
-            setDataFromServer((currentDataFromServer) =>
-                currentDataFromServer.filter((card) => card._id !== id)
-            );
-        };
+    const { dataFromServer, setDataFromServer } = useContext(CardsContext);
+    const navigate = useNavigate();
+    if (!dataFromServer || !dataFromServer.length) {
+        return <Typography>Could not find any items</Typography>;
+    }
+    const handleDeleteCard = (id) => {
+        setDataFromServer((currentDataFromServer) =>
+            currentDataFromServer.filter((card) => card._id !== id)
+        );
+    };
 
-        const handleEditCard = (_id) => {
-            navigate(`${ROUTES.EDITCARD}/${_id}`);
-        };
+    const handleEditCard = (_id) => {
+        navigate(`${ROUTES.EDITCARD}/${_id}`);
+    };
 
     return (
         <Grid container spacing={2} >
@@ -45,8 +35,8 @@ const CardGridComponent = () => {
                         phone={item.phone}
                         address={item.address}
                         cardNumber={item.bizNumber}
-                    onDelete={handleDeleteCard}
-                    onEdit={handleEditCard}
+                        onDelete={handleDeleteCard}
+                        onEdit={handleEditCard}
                     />
                 </Grid>
             ))}

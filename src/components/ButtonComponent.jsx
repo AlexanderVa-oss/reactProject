@@ -14,7 +14,7 @@ const ButtonComponent = ({ color, children, onClick, disabled }) => {
         marginTop: "10px",
         width: "100%",
         color: "black",
-        backgroundColor: '#a251a8',
+        backgroundColor: '#5096be',
         ':hover': {
           backgroundColor: 'main',
         }

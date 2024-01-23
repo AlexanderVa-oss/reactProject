@@ -13,7 +13,7 @@
 }
 
 .navigation a:hover {
-    color: rgb(80, 150, 190);
+    color: #5096be;
 }
 
 @media (max-width: 1000px) {
