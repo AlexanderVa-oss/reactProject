@@ -6,6 +6,8 @@ import LoginContext from "./store/loginContext";
 import { jwtDecode } from "jwt-decode"; 
 import { ToastContainer } from "react-toastify";
 import { CardsProvider } from "./store/searchContext";
+import { ThemeProvider } from './store/themeContext';
+import './Styles/styles.css';
 
 function App() {
   const [login, setLogin] = useState(null);
@@ -29,6 +31,7 @@ function App() {
   }, []);
 
   return (
+    <ThemeProvider>
     <CardsProvider>
     <LoginContext.Provider value={{ login, setLogin }}>
       <ToastContainer />
@@ -37,6 +40,7 @@ function App() {
       </LayoutComponent>
     </LoginContext.Provider>
     </CardsProvider>
+    </ThemeProvider>
   );
 }
 

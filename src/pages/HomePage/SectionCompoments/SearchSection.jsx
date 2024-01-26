@@ -3,6 +3,7 @@ import React, { useState, useContext } from 'react';
 import { TextField, Grid } from '@mui/material';
 import ButtonComponent from '../../../components/ButtonComponent';
 import { CardsContext } from '../../../store/searchContext';
+import  TextInputComponentAll  from '../../../components/TextInputComponentAll';
 
 const SearchSection = ({ onSearch }) => {
     const { dataFromServer, handleSearchResults } = useContext(CardsContext);
@@ -38,38 +39,19 @@ const SearchSection = ({ onSearch }) => {
     };
 
     return (
-        <Grid container justifyContent="space-between"  sx={{
-            backgroundColor: 'white',
-            borderRadius: '0 0 10px 10px',
-        }}>
-            <TextField
-                sx={{
-                    width: '25%',
-                    margin: 2,
-                    backgroundColor: 'white',
-                }}
+        <Grid className='searchBackgraund' container justifyContent="space-between">
+            <TextInputComponentAll
                 label="Title"
                 value={titleSearch}
                 onChange={(e) => setTitleSearch(e.target.value)}
             />
-            <TextField
-                sx={{
-                    width: '25%',
-                    margin: 2,
-                    backgroundColor: 'white',
-                }}
+            <TextInputComponentAll
                 label="Phone"
                 value={phoneSearch}
                 onChange={(e) => setPhoneSearch(e.target.value)}
             />
-            <TextField
-                sx={{
-                    width: '25%',
-                    margin: 2,
-                    backgroundColor: 'white',
-                }}
+            <TextInputComponentAll
                 label="Address"
-                variant="outlined"
                 value={addressSearch}
                 onChange={(e) => setAddressSearch(e.target.value)}
             />

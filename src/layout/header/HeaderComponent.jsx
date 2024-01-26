@@ -9,8 +9,8 @@ import Links from './Links';
 import { NavLink } from "react-router-dom";
 import { useState } from 'react';
 import { alwaysLinks } from './myLink';
-import "./ui/headerStyle.css"
 import { Button } from '@mui/material';
+import  ThemeToggleButton  from '../header/ui/ThemeToggleButton';
 
 const Header = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
@@ -36,6 +36,7 @@ const Header = () => {
         <Grid className="header" container>
 
             <Grid container sx={{ display: 'flex', justifyContent: 'end', alignItems: 'center' }}>
+                <ThemeToggleButton />
                 <Button variant="h6" sx={{ display: 'inline' }}>
                     {getButtonLabel()}
                 </Button>
@@ -51,7 +52,7 @@ const Header = () => {
             </Grid>
 
             <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h3"
+                <Typography variant="h2"
                     sx={{
                         fontSize: {
                             xs: '2rem',

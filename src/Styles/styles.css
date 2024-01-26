@@ -1,0 +1,93 @@
+/* styles.css */
+.light-mode {
+    background-color: white;
+    color: black;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: white;
+}
+
+/* CSS */
+.theme-toggle-button {
+    display: block;
+}
+
+@media (max-width: 1000px) {
+    .theme-toggle-button {
+        display: none;
+    }
+}
+
+/* Header */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 18px;
+}
+
+.navigation a:hover {
+    color: #5096be;
+}
+
+@media (max-width: 1000px) {
+    img {
+        display: none;
+    }
+}
+
+/* Search */
+.light-mode .searchBackgraund {
+    background-color: none;
+}
+
+.dark-mode .searchBackgraund {
+    background-color: #333;
+}
+
+.TextInputComponentAll {
+    width: 25%;
+    background: #cae7f7;
+}
+
+/* FirstSection */
+.light-mode .h1Custom {
+    text-Align: center;
+    margin: 20px 0;
+    color: #333;
+    text-Shadow: 2px 2px 4px #aaa;
+}
+
+.dark-mode h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #fff;
+    text-shadow: 2px 2px 4px #000;
+}
+
+/* CardsSection */
+.light-mode h3 {
+    font-Weight: normal;
+    text-Align: center;
+    margin: 20px 0;
+    color: #333;
+    letter-Spacing: 1px;
+    text-Shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode h3 {
+    font-weight: normal;
+    text-align: center;
+    margin: 20px 0;
+    color: #ddd;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+}

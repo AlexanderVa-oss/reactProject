@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Box, Avatar, Typography, Grid } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import axios from "axios";
-import TextInputComponent from "../../components/TextInputComponent";
+import TextInputComponent from "../../components/TextInputComponentEditCard";
 import validateSchema from "../../validation/cardValidation";
 // import LoginContext from "../../store/loginContext";
 // import { fromServer } from "./normalizeEdit";
