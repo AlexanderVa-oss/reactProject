@@ -1,6 +1,6 @@
 // SearchSection.jsx
 import React, { useState, useContext } from 'react';
-import { TextField, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import ButtonComponent from '../../../components/ButtonComponent';
 import { CardsContext } from '../../../store/searchContext';
 import  TextInputComponentAll  from '../../../components/TextInputComponentAll';

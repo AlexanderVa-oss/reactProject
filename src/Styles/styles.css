@@ -1,6 +1,6 @@
 /* styles.css */
 .light-mode {
-    background-color: white;
+    background-color: #cae7f7;
     color: black;
 }
 
@@ -47,10 +47,12 @@
 /* Search */
 .light-mode .searchBackgraund {
     background-color: none;
+    margin: 10px;
 }
 
 .dark-mode .searchBackgraund {
     background-color: #333;
+    margin: 10px;
 }
 
 .TextInputComponentAll {

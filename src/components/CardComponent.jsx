@@ -1,3 +1,4 @@
+// CardComponent.jsx
 import {
   Card,
   CardHeader,
@@ -16,6 +17,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
+import React, { useContext } from 'react';
+import LoginContext from "../store/loginContext";
 
 const CardComponent = ({
   title,
@@ -39,6 +42,12 @@ const CardComponent = ({
   const handleImageError = (e) => {
     e.target.src = 'https://cdn.leonardo.ai/users/174b9e54-f96e-4369-950f-7eaad8384fa9/generations/8f9b2e2c-a01b-48b4-8bd4-80d1259f7942/Leonardo_Diffusion_XL_page_not_found_0.jpg';
   };
+
+  const { login } = useContext(LoginContext);
+  const userLogin = login;
+  const userBusiness = login?.isBusiness;
+  const userAdmin = login?.isAdmin;
+
 
   return (
     <Card sx={{
@@ -81,21 +90,31 @@ const CardComponent = ({
           {cardNumber}
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+
           <Box>
-            <IconButton onClick={handleDeleteClick}>
-              <DeleteIcon />
-            </IconButton>
-            <IconButton onClick={handleEditClick}>
-              <ModeIcon />
-            </IconButton>
+            {(userAdmin || userBusiness) && (
+              <IconButton onClick={handleDeleteClick}>
+                <DeleteIcon />
+              </IconButton>
+            )}
+
+            {(userAdmin || userBusiness) && (
+              <IconButton onClick={handleEditClick}>
+                <ModeIcon />
+              </IconButton>
+            )}
           </Box>
+
           <Box>
             <IconButton>
               <LocalPhoneIcon />
             </IconButton>
-            <IconButton>
-              <FavoriteIcon />
-            </IconButton>
+
+            {(userAdmin || userBusiness || userLogin) && (
+              <IconButton>
+                <FavoriteIcon />
+              </IconButton>
+            )}
           </Box>
         </Box>
       </CardContent>
