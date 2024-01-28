@@ -6,10 +6,12 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
 import { CardsContext } from "../store/searchContext";
+import React from "react";
 
 const CardGridComponent = () => {
     const { dataFromServer, setDataFromServer } = useContext(CardsContext);
     const navigate = useNavigate();
+
     if (!dataFromServer || !dataFromServer.length) {
         return <Typography>Could not find any items</Typography>;
     }
