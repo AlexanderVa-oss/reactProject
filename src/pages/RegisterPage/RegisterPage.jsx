@@ -1,7 +1,6 @@
 // RegisterPage.jsx
 import React, { useState } from 'react';
 import Avatar from "@mui/material/Avatar";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import { Link } from 'react-router-dom';
@@ -17,6 +16,7 @@ import validate from "../../validation/registerValidation";
 import ButtonComponent from "../../components/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import TextInputComponentAll from "../../components/TextInputComponentAll";
 
 const RegisterPage = () => {
     const [inputsValue, setInputsValue] = useState({
@@ -148,7 +148,7 @@ const RegisterPage = () => {
             <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 3 }}>
                 <Grid container spacing={2}>
                     <Grid item xs={12} sm={4}>
-                        <TextField
+                        <TextInputComponentAll
                             autoComplete="given-name"
                             name="first"
                             required
@@ -164,7 +164,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12} sm={4}>
-                        <TextField
+                        <TextInputComponentAll
                             autoComplete="given-name"
                             name="middle"
                             fullWidth
@@ -176,7 +176,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12} sm={4}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             id="last"
@@ -191,7 +191,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             id="email"
@@ -206,7 +206,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="password"
@@ -222,7 +222,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="phone"
@@ -237,7 +237,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             fullWidth
                             name="url"
                             label="Url"
@@ -249,7 +249,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             fullWidth
                             name="alt"
                             label="Alt"
@@ -263,7 +263,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             fullWidth
                             name="state"
                             label="State"
@@ -275,7 +275,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="country"
@@ -290,7 +290,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="city"
@@ -305,7 +305,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="street"
@@ -320,7 +320,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="houseNumber"
@@ -335,7 +335,7 @@ const RegisterPage = () => {
                     </Grid>
 
                     <Grid item xs={12}>
-                        <TextField
+                        <TextInputComponentAll
                             required
                             fullWidth
                             name="zip"
