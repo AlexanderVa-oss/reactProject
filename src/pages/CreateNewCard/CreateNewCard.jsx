@@ -42,6 +42,7 @@ const CreateNewCard = () => {
         city: "",
         street: "",
         houseNumber: "",
+        zip: "",
     });
 
     const handleInputsChange = (e) => {
@@ -94,24 +95,39 @@ const CreateNewCard = () => {
             }
             return acc;
         }, {});
-
+        console.log(validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
         }
 
-        const userData = normalizeRegister(inputsValue);
+        const cardData = normalizeRegister(inputsValue);
 
-        try {
-            const response = await axios.post("/cards", userData);
-            if (response.status === 200 || response.status === 201) {
-                navigate(ROUTES.LOGIN);
-            } else {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+
+        if (token) {
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            };
+
+            try {
+                console.log(cardData);
+                const response = await axios.post("/cards", cardData, config);
+                if (response.status === 200 || response.status === 201) {
+                    console.log(response);
+                    navigate(ROUTES.HOME);
+                } else {
+                    toast.error('🔒 Something Went Wrong');
+                }
+            } catch (err) {
+                setErrors({ ...errors, serverError: err.response.data.message });
                 toast.error('🔒 Something Went Wrong');
+                console.error('There was an error submitting the form: ', err);
             }
-        } catch (err) {
-            toast.error('🔒 Something Went Wrong');
-            console.error('There was an error submitting the form: ', err);
+        } else {
+            toast.error('🔒 You must login Busness');
         }
     };
 
@@ -214,7 +230,8 @@ const CreateNewCard = () => {
                             id="web"
                             value={inputsValue.web}
                             onChange={handleInputsChange}
-                        />
+                            />
+                        {errors.web && <Alert severity="error">{errors.web}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -228,8 +245,8 @@ const CreateNewCard = () => {
                             value={inputsValue.url}
                             onChange={handleInputsChange}
                             onBlur={handleInputsBlur}
-                            />
-                            {errors.url && <Alert severity="error">{errors.url}</Alert>}
+                        />
+                        {errors.url && <Alert severity="error">{errors.url}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -243,8 +260,8 @@ const CreateNewCard = () => {
                             value={inputsValue.alt}
                             onChange={handleInputsChange}
                             onBlur={handleInputsBlur}
-                            />
-                            {errors.alt && <Alert severity="error">{errors.alt}</Alert>}
+                        />
+                        {errors.alt && <Alert severity="error">{errors.alt}</Alert>}
                     </Grid>
 
                     <Grid item xs={12}>
@@ -321,6 +338,7 @@ const CreateNewCard = () => {
 
                     <Grid item xs={12}>
                         <TextInputComponentAll
+                            required
                             fullWidth
                             name="zip"
                             label="Zip"
@@ -330,6 +348,7 @@ const CreateNewCard = () => {
                             onChange={handleInputsChange}
                             onBlur={handleInputsBlur}
                         />
+                        {errors.zip && <Alert severity="error">{errors.zip}</Alert>}
                     </Grid>
                 </Grid>
                 <ButtonComponent

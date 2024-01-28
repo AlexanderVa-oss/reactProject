@@ -14,6 +14,7 @@ const schemas = {
         .min(5)
         .required(),
     web: Joi.string().min(14).max(256).allow(''),
+    "string.length": "web must be a valid URL",
     url: Joi.string().uri().min(14).max(256).required(''),
     alt: Joi.string().min(2).max(256).required(''),
     state: Joi.string().min(2).max(256).allow(''),
@@ -21,7 +22,7 @@ const schemas = {
     city: Joi.string().min(2).max(256).required(),
     street: Joi.string().min(2).max(256).required(),
     houseNumber: Joi.number().min(1).max(10000).required(),
-    zip: Joi.number().min(2).max(9999999).allow(),
+    zip: Joi.number().min(2).max(9999999).required(),
 };
 
 const validate = {

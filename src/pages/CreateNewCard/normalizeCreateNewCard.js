@@ -1,5 +1,5 @@
 // normalizeCreateNewCard.js
-const normalizeCreateNewCard = (data, isBusiness) => {
+const normalizeCreateNewCard = (data) => {
     return {
         title: data.title,
         subtitle: data.subtitle,

@@ -120,6 +120,7 @@ const RegisterPage = () => {
                 toast.error('🔒 Something Went Wrong');
             }
         } catch (err) {
+            setErrors({ ...errors, serverError: err.response.data.message });
             toast.error('🔒 Something Went Wrong');
             console.error('There was an error submitting the form: ', err);
         }
