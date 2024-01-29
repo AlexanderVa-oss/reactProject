@@ -14,6 +14,7 @@ import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import normalizeCreateNewCard from "../CreateNewCard/normalizeCreateNewCard";
+import { toast } from "react-toastify";
 
 
 const EditCardPage = () => {
@@ -48,10 +49,9 @@ const EditCardPage = () => {
       .get("/cards/" + id)
       .then(({ data }) => {
         if (data.user_id === login._id) {
+          toast.success("💕 Now you can update your card", { /* options toast */ });
         } else {
-          //not the same user
-          navigate(ROUTES.HOME);
-          //toast
+          toast.success("🤔 Not the same user", { /* options toast */ });
         }
         //move to the if
         setInputsValue(fromServer(data));

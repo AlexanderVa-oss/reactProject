@@ -19,6 +19,8 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
 import React, { useContext } from 'react';
 import LoginContext from "../store/loginContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const CardComponent = ({
   title,
@@ -27,14 +29,38 @@ const CardComponent = ({
   phone,
   address,
   cardNumber,
-  id,
+  userId,
   onDelete,
+  id,
 }) => {
   const navigate = useNavigate();
+  const { login } = useContext(LoginContext);
+  const isCardOwner = login?._id === userId;
 
-  const handleDeleteClick = () => {
-    onDelete(id);
+  const handleDeleteClick = async () => {
+    const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+    if (!token) {
+      // Обработка случая, когда пользователь не авторизован
+      return;
+    }
+
+    try {
+      const response = await axios.delete(`/cards/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+
+      if (response.status === 200) {
+        // Удаление карточки из состояния на клиенте, если это необходимо
+        onDelete(id);
+        toast.success("😎 Your card deleted", { /* options toast */ });
+      }
+    } catch (error) {
+      console.error('Error on delete card ', error);
+    }
   };
+
   const handleEditClick = () => {
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
@@ -43,7 +69,6 @@ const CardComponent = ({
     e.target.src = 'https://cdn.leonardo.ai/users/174b9e54-f96e-4369-950f-7eaad8384fa9/generations/8f9b2e2c-a01b-48b4-8bd4-80d1259f7942/Leonardo_Diffusion_XL_page_not_found_0.jpg';
   };
 
-  const { login } = useContext(LoginContext);
   const userLogin = login;
   const userBusiness = login?.isBusiness;
   const userAdmin = login?.isAdmin;
@@ -92,13 +117,13 @@ const CardComponent = ({
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
 
           <Box>
-            {(userAdmin || userBusiness) && (
+            {(userAdmin || isCardOwner) && (
               <IconButton onClick={handleDeleteClick}>
                 <DeleteIcon />
               </IconButton>
             )}
 
-            {(userAdmin || userBusiness) && (
+            {(userAdmin || isCardOwner) && (
               <IconButton onClick={handleEditClick}>
                 <ModeIcon />
               </IconButton>
@@ -109,7 +134,6 @@ const CardComponent = ({
             <IconButton>
               <LocalPhoneIcon />
             </IconButton>
-
             {(userAdmin || userBusiness || userLogin) && (
               <IconButton>
                 <FavoriteIcon />

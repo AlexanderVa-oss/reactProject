@@ -15,6 +15,7 @@ const CardGridComponent = () => {
     if (!dataFromServer || !dataFromServer.length) {
         return <Typography>Could not find any items</Typography>;
     }
+
     const handleDeleteCard = (id) => {
         setDataFromServer((currentDataFromServer) =>
             currentDataFromServer.filter((card) => card._id !== id)
@@ -30,6 +31,7 @@ const CardGridComponent = () => {
             {dataFromServer.map((item, index) => (
                 <Grid item lg={3} md={4} sm={6} xs={12} display={'grid'} justifyItems={'center'} key={"Card" + index}>
                     <CardComponent
+                        userId={item.user_Id}
                         id={item._id}
                         title={item.title}
                         subtitle={item.subtitle}
