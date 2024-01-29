@@ -1,7 +1,7 @@
 const fromServer = (dataFromServer) => {
   return {
     title: dataFromServer.title,
-    subTitle: dataFromServer.subtitle,
+    subtitle: dataFromServer.subtitle,
     description: dataFromServer.description,
     phone: dataFromServer.phone,
     email: dataFromServer.email,

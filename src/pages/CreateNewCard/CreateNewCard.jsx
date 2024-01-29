@@ -116,16 +116,25 @@ const CreateNewCard = () => {
                 console.log(cardData);
                 const response = await axios.post("/cards", cardData, config);
                 if (response.status === 200 || response.status === 201) {
-                    console.log(response);
                     navigate(ROUTES.HOME);
                 } else {
                     toast.error('🔒 Something Went Wrong');
                 }
             } catch (err) {
-                setErrors({ ...errors, serverError: err.response.data.message });
-                toast.error('🔒 Something Went Wrong');
-                console.error('There was an error submitting the form: ', err);
+                // Cannot read properties of undefined(reading 'includes')	
+                if (err.response && err.response.data) {
+                    if (err.response.data.includes("E11000 duplicate key error collection")) {
+                        toast.error('🔒 This Email is already in use.');
+                    } else {
+                        toast.error('🔒 Something Went Wrong');
+                    }
+                    console.error('Error response data: ', err.response.data);
+                } else {
+                    toast.error('🔒 An unexpected error occurred');
+                    console.error('Unexpected error: ', err);
+                }
             }
+
         } else {
             toast.error('🔒 You must login Busness');
         }
@@ -352,7 +361,8 @@ const CreateNewCard = () => {
                     </Grid>
                 </Grid>
                 <ButtonComponent
-                    disabled={!allRequiredFieldsFilled || !noValidationErrors}
+                    // disabled={Object.keys(errors).length > 0}
+                    // disabled={!allRequiredFieldsFilled || !noValidationErrors}
                     color="primary">
                     Create
                 </ButtonComponent>

@@ -13,8 +13,9 @@ const schemas = {
         .email({ tlds: { allow: false } })
         .min(5)
         .required(),
-    web: Joi.string().min(14).max(256).allow(''),
-    "string.length": "web must be a valid URL",
+    web: Joi.string().min(14).max(256).allow('').messages({
+    "string.length": "web must be a valid URL"
+    }),
     url: Joi.string().uri().min(14).max(256).required(''),
     alt: Joi.string().min(2).max(256).required(''),
     state: Joi.string().min(2).max(256).allow(''),
