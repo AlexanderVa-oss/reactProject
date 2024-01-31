@@ -35,7 +35,7 @@ const CardComponent = ({
 }) => {
   const navigate = useNavigate();
   const { login } = useContext(LoginContext);
-  const isCardOwner = login?._id === userId;
+  const isCardOwner = login?.id === !userId;
 
   const handleDeleteClick = async () => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
@@ -65,6 +65,10 @@ const CardComponent = ({
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
 
+  const handleCardClick = () => {
+    navigate(`${ROUTES.CARD}/${id}`);
+  };
+
   const handleImageError = (e) => {
     e.target.src = 'https://cdn.leonardo.ai/users/174b9e54-f96e-4369-950f-7eaad8384fa9/generations/8f9b2e2c-a01b-48b4-8bd4-80d1259f7942/Leonardo_Diffusion_XL_page_not_found_0.jpg';
   };
@@ -82,10 +86,12 @@ const CardComponent = ({
       '&:hover': {
         transform: 'scale(1.05)',
         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)'
-      }
-    }} square raised>
+      },
+    }}
+      square raised>
       <CardActionArea>
         <CardMedia
+          onClick={handleCardClick}
           component="img"
           image={img}
           onError={handleImageError}
@@ -134,6 +140,7 @@ const CardComponent = ({
             <IconButton>
               <LocalPhoneIcon />
             </IconButton>
+
             {(userAdmin || userBusiness || userLogin) && (
               <IconButton>
                 <FavoriteIcon />

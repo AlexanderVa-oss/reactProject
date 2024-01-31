@@ -7,5 +7,6 @@ const ROUTES = {
   CREATECARD: "/createcard",
   ABOUTUS: '/aboutus',
   SANDBOX: '/sandbox',
+  CARD: "/card",
 };
 export default ROUTES;

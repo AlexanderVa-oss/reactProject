@@ -26,6 +26,11 @@ const CardGridComponent = () => {
         navigate(`${ROUTES.EDITCARD}/${_id}`);
     };
 
+    const handleCardClick = (_id) => {
+        console.log(_id);
+        navigate(`${ROUTES.CARD}/${_id}`);
+    };  
+
     return (
         <Grid container spacing={2} >
             {dataFromServer.map((item, index) => (
@@ -41,6 +46,7 @@ const CardGridComponent = () => {
                         cardNumber={item.bizNumber}
                         onDelete={handleDeleteCard}
                         onEdit={handleEditCard}
+                        onClick={handleCardClick}
                     />
                 </Grid>
             ))}
