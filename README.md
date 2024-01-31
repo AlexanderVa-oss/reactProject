@@ -70,16 +70,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 
-### Adding React Leaflet
+### Adding Map from 
 
-If you have some problems with map on Card page check if you insall React Leaflet.
-
-[https://react-leaflet.js.org/docs/start-installation/]
-
-install 
-
-npm install react react-dom leaflet
-
-then install 
-
-npm install react-leaflet
+https://www.maps.ie/create-google-map/

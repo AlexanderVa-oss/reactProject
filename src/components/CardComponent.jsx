@@ -35,7 +35,8 @@ const CardComponent = ({
 }) => {
   const navigate = useNavigate();
   const { login } = useContext(LoginContext);
-  const isCardOwner = login?.id === !userId;
+
+  const isCardOwner = login?._id === userId;
 
   const handleDeleteClick = async () => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");

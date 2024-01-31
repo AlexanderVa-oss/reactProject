@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { fromServer } from "../EditCardPage/normalizeEdit";
 import { Grid, Typography, CardMedia, } from "@mui/material";
 import MainSection from "../HomePage/SectionCompoments/MainSection";
+import GoogleMap from "../../components/MapComponent";
 
 const CardPageComponent = () => {
     const [inputsValue, setInputsValue] = useState({
@@ -73,6 +74,17 @@ const CardPageComponent = () => {
                 <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Typography variant="h5">{`Our mail: ${inputsValue.email}`}</Typography>
                 </Grid>
+                <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Typography variant="h5">{`City: ${inputsValue.city}`}</Typography>
+                </Grid>
+            </Grid>
+
+            <Grid item xs={12} m={5} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <GoogleMap
+                    city={inputsValue.city}
+                    street={inputsValue.street}
+                    houseNumber={inputsValue.houseNumber}
+                />
             </Grid>
         </Grid>
     )
