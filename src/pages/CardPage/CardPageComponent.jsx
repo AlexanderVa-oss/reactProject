@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import { fromServer } from "../EditCardPage/normalizeEdit";
 import { Grid, Typography, CardMedia, } from "@mui/material";
 import MainSection from "../HomePage/SectionCompoments/MainSection";
-import Paper from '@mui/material/Paper';
 
 const CardPageComponent = () => {
     const [inputsValue, setInputsValue] = useState({
@@ -64,7 +63,7 @@ const CardPageComponent = () => {
                 />
             </Grid>
 
-            <Grid item xs={12} sm={8} md={5}   square sx={{background: 'none', height:'100%'}}>
+            <Grid item xs={12} sm={8} md={5} sx={{ background: 'none', height: '100%' }}>
                 <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <Typography variant="h4">{`Description: ${inputsValue.description}`}</Typography>
                 </Grid>
