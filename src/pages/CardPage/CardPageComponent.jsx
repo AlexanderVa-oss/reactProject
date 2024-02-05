@@ -42,40 +42,60 @@ const CardPageComponent = () => {
     return (
         <Grid container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <MainSection />
-            </Grid>
-
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h1" color="initial">{`${inputsValue.title}`}</Typography>
-            </Grid>
-
-            <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Typography variant="h3" color="initial">{`${inputsValue.subtitle}`}</Typography>
-            </Grid>
-
-            <Grid item xs={12} md={6}>
-                <CardMedia
-                    component="img"
-                    image={inputsValue.url}
-                    onError={handleImageError}
-                    alt="Your Image"
-                    height={600} sx={{ objectFit: "cover" }}
-                />
-            </Grid>
-
-            <Grid item xs={12} sm={8} md={5} sx={{ background: 'none', height: '100%' }}>
-                <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography variant="h4">{`Description: ${inputsValue.description}`}</Typography>
+            <Grid container >
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <MainSection />
                 </Grid>
-                <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography variant="h5">{`Our phone: ${inputsValue.phone}`}</Typography>
+
+                <Grid item xs={12} sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}>
+                    <Typography
+                        variant="h1"
+                        sx={{ fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3rem', lg: '4rem' } }}
+                        color="initial">{`${inputsValue.title}`}
+                    </Typography>
                 </Grid>
-                <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography variant="h5">{`Our mail: ${inputsValue.email}`}</Typography>
+
+                <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <Typography
+                        variant="h3"
+                        sx={{ fontSize: { xs: '1.5rem', sm: '2.5rem', md: '3rem', lg: '4rem' } }}
+                        color="initial">{`${inputsValue.subtitle}`}
+                    </Typography>
                 </Grid>
-                <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    <Typography variant="h5">{`City: ${inputsValue.city}`}</Typography>
+            </Grid>
+
+            <Grid container >
+                <Grid item xs={12} md={6}>
+                    <CardMedia
+                        component="img"
+                        image={inputsValue.url}
+                        onError={handleImageError}
+                        alt="Your Image"
+                        height={600} sx={{ objectFit: "cover" }}
+                    />
+                </Grid>
+
+                <Grid item xs={12} sm={8} md={5} ml={2} sx={{ background: 'none', height: '100%' }}>
+                    <Grid item xs={12} md={6} mt={2}>
+                        <Typography variant="h5">{`Our phone:`}</Typography>
+                        <Typography variant="h6">{`${inputsValue.phone}`}</Typography>
+                    </Grid>
+                    <Grid item xs={12} md={6} mt={3} sx={{ justifyContent: 'start', alignItems: 'center' }}>
+                        <Typography variant="h5">{`Our mail:`}</Typography>
+                        <Typography variant="h6">{`${inputsValue.email}`}</Typography>
+                    </Grid>
+                    <Grid item xs={12} md={6} mt={2}>
+                        <Typography variant="h5">{`Adress:`}</Typography>
+                        <Typography variant="h6">{`${inputsValue.city} ${inputsValue.street} ${inputsValue.houseNumber}`}</Typography>
+                        <Grid item xs={12} mt={2}>
+                            <Typography variant="h5">{`Description:`}</Typography>
+                            <Typography variant="p">{`${inputsValue.description}`}</Typography>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Grid>
 
