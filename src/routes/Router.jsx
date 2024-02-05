@@ -8,7 +8,8 @@ import CreateNewCard from "../pages/CreateNewCard/CreateNewCard";
 import AboutUsPage from "../pages/AboutUsPage/AboutUsPage";
 import Sandbox from "../sandBox/SandBox";
 import CardPageComponent from "../pages/CardPage/CardPageComponent";
-import LikedCardsPage from "../pages/MyCardPage/MyCardPage";
+import MyCardPage from "../pages/MyCardPage/MyCardPage";
+import MyLikedPage from "../pages/MyFavoriteCards/FavoriteCardsPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage ";
 
 
@@ -24,8 +25,8 @@ const Router = () => {
             <Route path={ROUTES.ABOUTUS} element={<AboutUsPage />} />
             <Route path={ROUTES.SANDBOX} element={<Sandbox />} />
             <Route path={`${ROUTES.CARD}/:id`} element={<CardPageComponent />} />
-            <Route path={ROUTES.MYCARDS} element={<LikedCardsPage />} />
-
+            <Route path={ROUTES.MYCARDS} element={<MyCardPage />} />
+            <Route path={ROUTES.LIKEDCARDS} element={<MyLikedPage />} />
         </Routes>
     );
 };

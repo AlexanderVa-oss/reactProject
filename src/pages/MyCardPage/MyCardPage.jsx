@@ -8,7 +8,7 @@ import ROUTES from "../../routes/ROUTES";
 import { CardsContext } from "../../store/searchContext";
 import React from "react";
 import axios from "axios";
-import likedCards from "../../services/myCardHelper";
+import myCards from "../../services/myCardHelper";
 import LoginContext from "../../store/loginContext";
 
 const CardGridComponent = () => {
@@ -20,7 +20,7 @@ const CardGridComponent = () => {
         return <Typography>Could not find any items</Typography>;
     }
 
-    const dataFromServerFiltered = likedCards(
+    const dataFromServerFiltered = myCards(
         dataFromServer,
         login ? login._id : undefined
     );
@@ -57,7 +57,7 @@ const CardGridComponent = () => {
     return (
         <Grid container spacing={2} >
             {dataFromServerFiltered.map((item, index) => (
-                <Grid item lg={3} md={4} sm={6} xs={12} display={'grid'} justifyItems={'center'} key={"Card" + index}>
+                <Grid item lg={3} md={4} sm={6} xs={12} mt={2} display={'grid'} justifyItems={'center'} key={"Card" + index}>
                     <CardComponent
                         userId={item.user_id}
                         id={item._id}
