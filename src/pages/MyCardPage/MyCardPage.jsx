@@ -1,15 +1,15 @@
 //CardGridComponent.jsx
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
-import CardComponent from "./CardComponent";
+import CardComponent from "../../components/CardComponent";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import ROUTES from "../routes/ROUTES";
-import { CardsContext } from "../store/searchContext";
+import ROUTES from "../../routes/ROUTES";
+import { CardsContext } from "../../store/searchContext";
 import React from "react";
 import axios from "axios";
-import likedCards from "../services/likedCardHelper";
-import LoginContext from "../store/loginContext";
+import likedCards from "../../services/myCardHelper";
+import LoginContext from "../../store/loginContext";
 
 const CardGridComponent = () => {
     const { dataFromServer, setDataFromServer } = useContext(CardsContext);
@@ -37,7 +37,7 @@ const CardGridComponent = () => {
 
     const handleCardClick = (_id) => {
         navigate(`${ROUTES.CARD}/${_id}`);
-    };  
+    };
 
     const handleLikeCard = async (id) => {
         try {

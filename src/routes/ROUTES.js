@@ -8,5 +8,6 @@ const ROUTES = {
   ABOUTUS: '/aboutus',
   SANDBOX: '/sandbox',
   CARD: "/card",
+  MYCARDS: "/mycards"
 };
 export default ROUTES;
