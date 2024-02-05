@@ -32,6 +32,8 @@ const CardComponent = ({
   userId,
   onDelete,
   id,
+  liked,
+  isLiked
 }) => {
   const navigate = useNavigate();
   const { login } = useContext(LoginContext);
@@ -41,7 +43,6 @@ const CardComponent = ({
   const handleDeleteClick = async () => {
     const token = localStorage.getItem("token") || sessionStorage.getItem("token");
     if (!token) {
-      // Обработка случая, когда пользователь не авторизован
       return;
     }
 
@@ -53,7 +54,6 @@ const CardComponent = ({
       });
 
       if (response.status === 200) {
-        // Удаление карточки из состояния на клиенте, если это необходимо
         onDelete(id);
         toast.success("😎 Your card deleted", { /* options toast */ });
       }
@@ -65,6 +65,10 @@ const CardComponent = ({
   const handleEditClick = () => {
     navigate(`${ROUTES.EDITCARD}/${id}`);
   };
+
+  const handleLikedCard = ()=>{
+    liked(id);
+  }
 
   const handleCardClick = () => {
     navigate(`${ROUTES.CARD}/${id}`);
@@ -143,8 +147,8 @@ const CardComponent = ({
             </IconButton>
 
             {(userAdmin || userBusiness || userLogin) && (
-              <IconButton>
-                <FavoriteIcon />
+              <IconButton onClick={handleLikedCard}>
+                <FavoriteIcon style={{ color: isLiked ? 'red' : 'gray' }} />
               </IconButton>
             )}
           </Box>

@@ -7,16 +7,25 @@ import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
 import { CardsContext } from "../store/searchContext";
 import React from "react";
+import axios from "axios";
+import likedCards from "../services/likedCardHelper";
+import LoginContext from "../store/loginContext";
 
 const CardGridComponent = () => {
     const { dataFromServer, setDataFromServer } = useContext(CardsContext);
     const navigate = useNavigate();
+    const { login } = useContext(LoginContext);
 
     // dataFromServer.forEach(item => console.log(item));
 
     if (!dataFromServer || !dataFromServer.length) {
         return <Typography>Could not find any items</Typography>;
     }
+
+    const dataFromServerFiltered = likedCards(
+        dataFromServer,
+        login ? login._id : undefined
+    );
 
     const handleDeleteCard = (id) => {
         setDataFromServer((currentDataFromServer) =>
@@ -33,9 +42,24 @@ const CardGridComponent = () => {
         navigate(`${ROUTES.CARD}/${_id}`);
     };  
 
+    const handleLikeCard = async (id) => {
+        try {
+            let { data } = await axios.patch("/cards/" + id);
+            setDataFromServer((cDataFromServer) => {
+                let cardIndex = cDataFromServer.findIndex((card) => card._id === id);
+                if (cardIndex >= 0) {
+                    cDataFromServer[cardIndex] = data;
+                }
+                return [...cDataFromServer];
+            });
+        } catch (err) {
+            console.log("error from axios (like)", err);
+        }
+    };
+
     return (
         <Grid container spacing={2} >
-            {dataFromServer.map((item, index) => (
+            {dataFromServerFiltered.map((item, index) => (
                 <Grid item lg={3} md={4} sm={6} xs={12} display={'grid'} justifyItems={'center'} key={"Card" + index}>
                     <CardComponent
                         userId={item.user_id}
@@ -49,6 +73,8 @@ const CardGridComponent = () => {
                         onDelete={handleDeleteCard}
                         onEdit={handleEditCard}
                         onClick={handleCardClick}
+                        liked={handleLikeCard}
+                        isLiked={item.liked}
                     />
                 </Grid>
             ))}
