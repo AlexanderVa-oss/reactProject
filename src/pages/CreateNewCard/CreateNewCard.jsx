@@ -1,5 +1,5 @@
 // CrearteNewCard.jsx
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
@@ -12,6 +12,7 @@ import ButtonComponent from "../../components/ButtonComponent";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import TextInputComponentAll from "../../components/TextInputComponentAll";
+import { CardsContext } from '../../store/searchContext';
 
 const CreateNewCard = () => {
     const [inputsValue, setInputsValue] = useState({
@@ -84,6 +85,8 @@ const CreateNewCard = () => {
 
     const navigate = useNavigate();
 
+    const { handleSearchResults } = useContext(CardsContext);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -95,7 +98,6 @@ const CreateNewCard = () => {
             }
             return acc;
         }, {});
-        console.log(validationErrors)
         if (Object.keys(validationErrors).length > 0) {
             setErrors(validationErrors);
             return;
@@ -113,15 +115,21 @@ const CreateNewCard = () => {
             };
 
             try {
-                console.log(cardData);
                 const response = await axios.post("/cards", cardData, config);
                 if (response.status === 200 || response.status === 201) {
+                    // renew cards after created
+                    axios.get("/cards")
+                        .then(response => {
+                            handleSearchResults(response.data);
+                        })
+                        .catch(error => {
+                            console.error("Error fetching updated cards:", error);
+                        });
                     navigate(ROUTES.HOME);
                 } else {
                     toast.error('🔒 Something Went Wrong');
                 }
-            } catch (err) {
-                // Cannot read properties of undefined(reading 'includes')	
+            } catch (err) {	
                 if (err.response && err.response.data) {
                     if (err.response.data.includes("E11000 duplicate key error collection")) {
                         toast.error('🔒 This Email is already in use.');
@@ -239,7 +247,7 @@ const CreateNewCard = () => {
                             id="web"
                             value={inputsValue.web}
                             onChange={handleInputsChange}
-                            />
+                        />
                         {errors.web && <Alert severity="error">{errors.web}</Alert>}
                     </Grid>
 
@@ -362,7 +370,7 @@ const CreateNewCard = () => {
                 </Grid>
                 <ButtonComponent
                     // disabled={Object.keys(errors).length > 0}
-                    // disabled={!allRequiredFieldsFilled || !noValidationErrors}
+                    disabled={!allRequiredFieldsFilled || !noValidationErrors}
                     color="primary">
                     Create
                 </ButtonComponent>
