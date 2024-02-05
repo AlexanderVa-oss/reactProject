@@ -22,7 +22,7 @@ export const CardsProvider = ({ children }) => {
     };
 
     return (
-        <CardsContext.Provider value={{ dataFromServer, handleSearchResults }}>
+        <CardsContext.Provider value={{ dataFromServer, setDataFromServer, handleSearchResults }}>
             {children}
         </CardsContext.Provider>
     );
