@@ -24,7 +24,6 @@ const bizLinks = [
 ];
 
 const adminLinks = [
-    { to: ROUTES.LIKEDCARDS, children: "Liked Cards" },
     { to: ROUTES.LOGIN, children: "Login page" },
 ];
 export { alwaysLinks, loggedInLinks, loggedOutLinks, bizLinks, adminLinks };
