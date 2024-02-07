@@ -153,7 +153,6 @@ const RegisterPage = () => {
                             autoComplete="given-name"
                             name="first"
                             required
-                            fullWidth
                             id="first"
                             label="First Name"
                             autoFocus
@@ -168,7 +167,6 @@ const RegisterPage = () => {
                         <TextInputComponentAll
                             autoComplete="given-name"
                             name="middle"
-                            fullWidth
                             id="middle"
                             label="Middle Name"
                             value={inputsValue.middle}
@@ -179,7 +177,6 @@ const RegisterPage = () => {
                     <Grid item xs={12} sm={4}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             id="last"
                             label="Last Name"
                             name="last"
@@ -194,7 +191,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             id="email"
                             label="Email Address"
                             name="email"
@@ -209,7 +205,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="password"
                             label="Password"
                             type="password"
@@ -225,7 +220,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="phone"
                             label="Phone"
                             id="phone"
@@ -239,7 +233,6 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <TextInputComponentAll
-                            fullWidth
                             name="url"
                             label="Url"
                             id="url"
@@ -251,7 +244,6 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <TextInputComponentAll
-                            fullWidth
                             name="alt"
                             label="Alt"
                             id="alt"
@@ -265,7 +257,6 @@ const RegisterPage = () => {
 
                     <Grid item xs={12}>
                         <TextInputComponentAll
-                            fullWidth
                             name="state"
                             label="State"
                             id="state"
@@ -278,7 +269,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="country"
                             label="Country"
                             id="country"
@@ -293,7 +283,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="city"
                             label="City"
                             id="city"
@@ -308,7 +297,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="street"
                             label="Street"
                             id="street"
@@ -323,7 +311,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="houseNumber"
                             label="House Number"
                             id="houseNumber"
@@ -338,7 +325,6 @@ const RegisterPage = () => {
                     <Grid item xs={12}>
                         <TextInputComponentAll
                             required
-                            fullWidth
                             name="zip"
                             label="Zip"
                             id="zip"

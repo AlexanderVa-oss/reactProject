@@ -3,7 +3,7 @@ import React, { useState, useContext } from 'react';
 import { Grid } from '@mui/material';
 import ButtonComponent from '../../../components/ButtonComponent';
 import { CardsContext } from '../../../store/searchContext';
-import  TextInputComponentAll  from '../../../components/TextInputComponentAll';
+import TextInputComponentAll from '../../../components/TextInputComponentAll';
 
 const SearchSection = ({ onSearch }) => {
     const { dataFromServer, handleSearchResults } = useContext(CardsContext);
@@ -39,23 +39,29 @@ const SearchSection = ({ onSearch }) => {
     };
 
     return (
-        <Grid className='searchBackgraund' container justifyContent="space-between">
-            <TextInputComponentAll
-                label="Title"
-                value={titleSearch}
-                onChange={(e) => setTitleSearch(e.target.value)}
-            />
-            <TextInputComponentAll
-                label="Phone"
-                value={phoneSearch}
-                onChange={(e) => setPhoneSearch(e.target.value)}
-            />
-            <TextInputComponentAll
-                label="Address"
-                value={addressSearch}
-                onChange={(e) => setAddressSearch(e.target.value)}
-            />
-            <Grid container sx={{
+        <Grid container spacing={2} className='searchBackgraund'>
+            <Grid item xs={11} sm={4}>
+                <TextInputComponentAll
+                    label="Title"
+                    value={titleSearch}
+                    onChange={(e) => setTitleSearch(e.target.value)}
+                />
+            </Grid>
+            <Grid item xs={11} sm={4}>
+                <TextInputComponentAll
+                    label="Phone"
+                    value={phoneSearch}
+                    onChange={(e) => setPhoneSearch(e.target.value)}
+                />
+            </Grid>
+            <Grid item xs={11} sm={4}>
+                <TextInputComponentAll
+                    label="Address"
+                    value={addressSearch}
+                    onChange={(e) => setAddressSearch(e.target.value)}
+                />
+            </Grid>
+            <Grid item xs={12} sm={12} sx={{
                 margin: 2,
             }}>
                 <ButtonComponent onClick={handleSearch}>Search</ButtonComponent>
