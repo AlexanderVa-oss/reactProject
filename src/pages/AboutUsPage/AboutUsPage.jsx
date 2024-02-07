@@ -5,36 +5,36 @@ const AboutUsPage = () => {
     return (
         <Container maxWidth="lg">
             <Box my={4}>
-                <Typography variant="h2" component="h1" gutterBottom>
-                    О нас
+                <Typography variant="h2" component="h2" gutterBottom>
+                    About me
                 </Typography>
                 <Paper style={{ padding: '20px' }}>
                     <Typography variant="h5" component="h2" gutterBottom>
-                        Наша миссия
+                        Our mission
                     </Typography>
                     <Typography paragraph>
-                        Мы стремимся предоставлять качественные услуги и инновационные решения для наших клиентов.
+                        I are committed to providing quality services and innovative solutions to my clients.
                     </Typography>
                     <Typography paragraph>
-                        Наша команда состоит из опытных специалистов, готовых решить любую вашу задачу.
+                        I try to solve any of your problems in the best way.
                     </Typography>
                 </Paper>
                 <Box my={4}>
                     <Typography variant="h5" gutterBottom>
-                        Команда
+                        Developer
                     </Typography>
                     <Grid container spacing={3}>
                         {/* Пример карточки сотрудника */}
                         <Grid item xs={12} sm={6} md={4}>
                             <Paper style={{ padding: '20px' }}>
-                                <Typography variant="h6" component="h3">
-                                    Иван Иванов
+                                <Typography variant="h5" component="h2">
+                                    Alexander Kukushkin
                                 </Typography>
-                                <Typography paragraph>Должность: Разработчик</Typography>
-                                <Typography paragraph>Опыт работы: 5 лет</Typography>
+                                <Typography paragraph>
+                                    Position: Developer student</Typography>
+                                <Typography paragraph>Work experience: junior</Typography>
                             </Paper>
                         </Grid>
-                        {/* Добавьте других сотрудников аналогично */}
                     </Grid>
                 </Box>
             </Box>
