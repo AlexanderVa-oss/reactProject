@@ -369,7 +369,6 @@ const CreateNewCard = () => {
                     </Grid>
                 </Grid>
                 <ButtonComponent
-                    // disabled={Object.keys(errors).length > 0}
                     disabled={!allRequiredFieldsFilled || !noValidationErrors}
                     color="primary">
                     Create

@@ -10,11 +10,20 @@ import { NavLink } from "react-router-dom";
 import { useState } from 'react';
 import { alwaysLinks } from './myLink';
 import { Button } from '@mui/material';
-import  ThemeToggleButton  from '../header/ui/ThemeToggleButton';
+import ThemeToggleButton from '../header/ui/ThemeToggleButton';
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
+import {
+    loggedInLinks,
+    loggedOutLinks,
+    bizLinks,
+    adminLinks
+} from "./myLink";
 
 const Header = () => {
     const [isDrawerOpen, setDrawerOpen] = useState(false);
     const { login, setLogin } = useContext(LoginContext);
+    const navigate = useNavigate();
 
     const getButtonLabel = () => {
         if (!login) return "Not Logged In";
@@ -25,6 +34,7 @@ const Header = () => {
 
     const handleLogout = () => {
         setLogin(null);
+        navigate(ROUTES.HOME);
         localStorage.removeItem("token");
         sessionStorage.removeItem("token");
     };
@@ -56,9 +66,9 @@ const Header = () => {
                     sx={{
                         fontSize: {
                             xs: '2rem',
-                            sm: '2.5rem', 
-                            md: '3rem', 
-                            lg: '3.5rem', 
+                            sm: '2.5rem',
+                            md: '3rem',
+                            lg: '3.5rem',
                             xl: '4rem'
                         }
                     }}
@@ -98,13 +108,41 @@ const Header = () => {
                 onClose={toggleDrawer}
             >
                 <List>
+                    {/* Always visible links */}
                     {alwaysLinks.map((link) => (
-                        <ListItem key={link.to} onClick={toggleDrawer} component={NavLink} to={link.to}>
+                        <ListItem  component={NavLink} to={link.to} onClick={toggleDrawer} key={link.to}>
                             <ListItemText primary={link.children} />
                         </ListItem>
                     ))}
+
+                    {/* Conditional rendering based on the user state */}
+                    {login && !login.isBusiness &&
+                        loggedInLinks.map((link) => (
+                            <ListItem  component={NavLink} to={link.to} onClick={toggleDrawer} key={link.to}>
+                                <ListItemText primary={link.children} />
+                            </ListItem>
+                        ))}
+                    {!login &&
+                        loggedOutLinks.map((link) => (
+                            <ListItem  component={NavLink} to={link.to} onClick={toggleDrawer} key={link.to}>
+                                <ListItemText primary={link.children} />
+                            </ListItem>
+                        ))}
+                    {login && login.isBusiness &&
+                        bizLinks.map((link) => (
+                            <ListItem  component={NavLink} to={link.to} onClick={toggleDrawer} key={link.to}>
+                                <ListItemText primary={link.children} />
+                            </ListItem>
+                        ))}
+                    {login && login.isAdmin &&
+                        adminLinks.map((link) => (
+                            <ListItem  component={NavLink} to={link.to} onClick={toggleDrawer} key={link.to}>
+                                <ListItemText primary={link.children} />
+                            </ListItem>
+                        ))}
                 </List>
             </Drawer>
+
         </Grid>
     );
 };

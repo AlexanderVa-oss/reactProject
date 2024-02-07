@@ -10,15 +10,17 @@ const loggedOutLinks = [
 ];
 
 const loggedInLinks = [
-    // { to: "/profile", children: "Profile page" },
     { to: ROUTES.REGISTER, children: "Register page" },
     { to: ROUTES.LIKEDCARDS, children: "Liked Cards" },
+    { to: ROUTES.USERUPDATE, children: "Update Information" },  
 ];
 
 const bizLinks = [
     { to: ROUTES.CREATECARD, children: "Create Card" },
     { to: ROUTES.MYCARDS, children: "My Cards" },
     { to: ROUTES.LIKEDCARDS, children: "Liked Cards" },
+    { to: ROUTES.USERUPDATE, children: "Update Information" }, 
+
 ];
 
 const adminLinks = [

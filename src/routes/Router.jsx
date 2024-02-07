@@ -11,6 +11,7 @@ import CardPageComponent from "../pages/CardPage/CardPageComponent";
 import MyCardPage from "../pages/MyCardPage/MyCardPage";
 import MyLikedPage from "../pages/MyFavoriteCards/FavoriteCardsPage"
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage ";
+import UpdateUser from "../pages/updateUserPage/updateUserPage"
 
 
 const Router = () => {
@@ -27,6 +28,7 @@ const Router = () => {
             <Route path={`${ROUTES.CARD}/:id`} element={<CardPageComponent />} />
             <Route path={ROUTES.MYCARDS} element={<MyCardPage />} />
             <Route path={ROUTES.LIKEDCARDS} element={<MyLikedPage />} />
+            <Route path={ROUTES.USERUPDATE} element={<UpdateUser />} />
         </Routes>
     );
 };

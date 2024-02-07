@@ -5,6 +5,7 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 import validate from "../../validation/newCardValidation";
 import LoginContext from "../../store/loginContext";
+import UserfromServer from "./normalizeUserEdit.js";
 import ButtonComponent from "../../components/ButtonComponent";
 import { useContext } from "react";
 import React, { useEffect } from 'react';
@@ -12,55 +13,57 @@ import TextInputComponentAll from "../../components/TextInputComponentAll";
 import Alert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
-import { fromServer } from "./normalizeEdit";
 import normalizeCreateNewCard from "../CreateNewCard/normalizeCreateNewCard";
 import { toast } from "react-toastify";
 
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
-    title: "",
-    subtitle: "",
-    description: "",
-    phone: "",
-    email: "",
-    web: "",
-    url: "",
-    alt: "",
-    state: "",
-    country: "",
-    city: "",
-    street: "",
-    houseNumber: "",
-    zip: "",
+    first: '',
+    middle: '',
+    last: '',
+    phone: '',
+    url: '',
+    alt: '',
+    state: '',
+    country: '',
+    city: '',
+    street: '',
+    houseNumber: '',
+    zip: '',
+    isBusiness: '',
   });
   const [errors, setErrors] = useState({});
 
-  let { id } = useParams();
+  let { _id, id } = useParams();
 
   const { login } = useContext(LoginContext);
   const navigate = useNavigate();
 
-  // get card information
+  // get user information
   useEffect(() => {
     if (!id || !login) {
+      console.log('not same error');
+      console.log(id);
+      console.log(login);
+      console.log(login._id);
       return;
     }
     axios
-      .get("/cards/" + id)
+      .get("/users" + _id)
       .then(({ data }) => {
-        if (data.user_id === login._id) {
+        if (_id === login._id) {
           toast.success("💕 Now you can update your card", { /* options toast */ });
         } else {
           toast.success("🤔 Not the same user", { /* options toast */ });
         }
         //move to the if
-        setInputsValue(fromServer(data));
+        setInputsValue(UserfromServer(data));
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [id, login, navigate]);
+  }, [_id, id, login, navigate]);
 
   let keysArray = Object.keys(inputsValue);
 
@@ -94,11 +97,14 @@ const EditCardPage = () => {
   const token = localStorage.getItem("token") || sessionStorage.getItem("token");
   const inputsData = normalizeCreateNewCard(inputsValue);
 
-  // submit new card information
+  // submit new user information
   const handleSubmit = async (event) => {
+    console.log(inputsData);
+    console.log(inputsValue);
+    console.log(_id);
     event.preventDefault();
     try {
-      const response = await axios.put(`/cards/${id}`, inputsData, {
+      const response = await axios.put(`/cards/${_id}`, inputsData, {
         headers: {
           "Authorization": `Bearer ${token}`
         }
