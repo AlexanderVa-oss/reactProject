@@ -202,24 +202,6 @@ const LoginPage = () => {
                 </Link>
               </Grid>
             </Grid>
-
-            <Grid item xs m={5}>
-              <Typography href="#" variant="body2">
-                {"Don't have an account?"}<br />
-                {'This Is Admin Accaount:'}<br />
-                email: admin@gmail.com<br />
-                password: Abc!123Abc<br /><br />
-                {'This Is Business Accaount:'}<br />
-                email: ellvis@email.com<br />
-                password: Abc!123Abc<br /><br />
-                {'This Is My Not Business Accaount:'}<br />
-                email: Alex@gmail.com<br />
-                password: Abc!123Abc<br /><br />
-                {'This Is My Business Accaount:'}<br />
-                email: Ale@gmail.com<br />
-                password: Abc!123Abc<br /><br />
-              </Typography>
-            </Grid>
           </Box>
         </Box>
       </Grid>
